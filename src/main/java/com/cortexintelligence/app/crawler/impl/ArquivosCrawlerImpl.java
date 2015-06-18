@@ -9,6 +9,9 @@ import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.hslf.extractor.PowerPointExtractor;
 import org.apache.poi.hwpf.extractor.WordExtractor;
+import org.apache.poi.xslf.usermodel.XMLSlideShow;
+import org.apache.poi.xslf.usermodel.XSLFSlide;
+import org.apache.poi.xslf.usermodel.XSLFTextShape;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,8 +24,6 @@ import java.util.Collection;
  * Created by lennonjesus on 18/06/15.
  */
 public class ArquivosCrawlerImpl extends WebCrawler implements ICrawler {
-
-//    private final String[] SUFFIX = {"*"};  // use the suffix to filter "txt", "pdf", "doc", "docx", "ppt", "pptx"
 
     @Override
     public void start(String... args) {
@@ -41,23 +42,29 @@ public class ArquivosCrawlerImpl extends WebCrawler implements ICrawler {
         for (File file : files) {
             System.out.println("Título: " + file.getPath());
 
-            String conteudo = "";
+            String conteudo = StringUtils.EMPTY;
 
             try {
                 String name = file.getName();
 
-                if(name.endsWith(".doc")) {
+                if (name.endsWith(".doc")) {
                     conteudo = new WordExtractor(new FileInputStream(file)).getText();
                 } else if (name.endsWith(".ppt")) {
                     conteudo = new PowerPointExtractor(new FileInputStream(file)).getText();
                 } else if (name.endsWith(".txt")) {
                     conteudo = Files.readAllLines(file.toPath(), Charset.defaultCharset()).toString(); //FIXME remover []
                 } else if (name.endsWith(".pdf")) {
-
+                    // conteudo = new PDFTextStripper().getText(PDDocument.load(file)); //FIXME
                 } else if (name.endsWith(".docx")) {
 
                 } else if (name.endsWith(".pptx")) {
+                    XMLSlideShow ppt = new XMLSlideShow(new FileInputStream(file));
+                    for (XSLFSlide slide : ppt.getSlides()) {
 
+                        for (XSLFTextShape shape : slide.getPlaceholders()) {
+                            conteudo = shape.getText(); // FIXME
+                        }
+                    }
                 }
 
             } catch (IOException e) {
@@ -68,5 +75,7 @@ public class ArquivosCrawlerImpl extends WebCrawler implements ICrawler {
         }
 
     }
+
+
 
 }
