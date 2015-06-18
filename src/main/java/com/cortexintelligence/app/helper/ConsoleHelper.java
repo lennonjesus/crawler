@@ -9,7 +9,7 @@ import org.apache.commons.lang.ArrayUtils;
  */
 public class ConsoleHelper {
 
-    private Tipo tipo;
+    private TipoCrawler tipoCrawler;
 
     public void init(String ... args) {
 
@@ -17,15 +17,15 @@ public class ConsoleHelper {
             throw new ParametrosInsuficientesException();
         }
 
-        tipo = Tipo.from(args[0]);
+        tipoCrawler = TipoCrawler.from(args[0]);
 
-        if (tipo == null) {
+        if (tipoCrawler == null) {
             throw new TipoInvalidoException();
         }
 
         ArrayUtils.removeElement(args, args[0]);
 
-        tipo.execute(args);
+        tipoCrawler.execute(args);
 
     }
 

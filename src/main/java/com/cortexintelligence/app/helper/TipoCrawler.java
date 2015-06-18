@@ -7,7 +7,7 @@ import com.cortexintelligence.app.crawler.impl.WebCrawlerImpl;
 /**
  * Created by lennonjesus on 18/06/15.
  */
-public enum Tipo {
+public enum TipoCrawler {
 
     ARQUIVOS("arquivos") {
         @Override
@@ -30,7 +30,7 @@ public enum Tipo {
 
     private String nome;
 
-    Tipo(String nome) {
+    TipoCrawler(String nome) {
         this.nome = nome;
     }
 
@@ -39,10 +39,10 @@ public enum Tipo {
      * @param nome nome do tipo a recuperar
      * @return o Tipo encontrado ou null, caso não haja correspondência
      */
-    public static Tipo from(String nome) {
-        for (Tipo tipo : Tipo.values()) {
-            if (tipo.nome.equalsIgnoreCase(nome)) {
-                return tipo;
+    public static TipoCrawler from(String nome) {
+        for (TipoCrawler tipoCrawler : TipoCrawler.values()) {
+            if (tipoCrawler.nome.equalsIgnoreCase(nome)) {
+                return tipoCrawler;
             }
         }
 

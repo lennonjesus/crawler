@@ -52,24 +52,26 @@ public class ArquivosCrawlerImpl extends WebCrawler implements ICrawler {
             try {
                 String name = file.getName();
 
+                FileInputStream fileInputStream = new FileInputStream(file);
+
                 if (name.endsWith(".doc")) {
-                    conteudo = new WordExtractor(new FileInputStream(file)).getText();
+                    conteudo = new WordExtractor(fileInputStream).getText();
                 } else if (name.endsWith(".ppt")) {
-                    conteudo = new PowerPointExtractor(new FileInputStream(file)).getText();
+                    conteudo = new PowerPointExtractor(fileInputStream).getText();
                 } else if (name.endsWith(".txt")) {
                     List<String> linhas = Files.readAllLines(file.toPath(), Charset.defaultCharset());
                     conteudo = linhas != null ? linhas.toString() : StringUtils.EMPTY; //FIXME remover []
                 } else if (name.endsWith(".pdf")) {
                     conteudo = new PDFTextStripper().getText(PDDocument.load(file)); //FIXME
                 } else if (name.endsWith(".docx")) {
-                    XWPFDocument doc = new XWPFDocument(new FileInputStream(file));
+                    XWPFDocument doc = new XWPFDocument(fileInputStream);
                     conteudo = new XWPFWordExtractor(doc).getText(); //FIXME
                 } else if (name.endsWith(".pptx")) {
-                    XMLSlideShow ppt = new XMLSlideShow(new FileInputStream(file));
+                    XMLSlideShow ppt = new XMLSlideShow(fileInputStream);
                     for (XSLFSlide slide : ppt.getSlides()) {
 
                         for (XSLFTextShape shape : slide.getPlaceholders()) {
-                            conteudo = shape.getText(); // FIXME
+                            conteudo = shape.getText(); // FIXME append!
                         }
                     }
                 }
@@ -82,6 +84,8 @@ public class ArquivosCrawlerImpl extends WebCrawler implements ICrawler {
         }
 
     }
+
+
 
 
 }
