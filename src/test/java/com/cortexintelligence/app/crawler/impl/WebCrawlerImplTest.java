@@ -1,7 +1,6 @@
 package com.cortexintelligence.app.crawler.impl;
 
 import com.cortexintelligence.app.crawler.ICrawler;
-import com.cortexintelligence.app.exceptions.DiretorioInvalidoException;
 import com.cortexintelligence.app.exceptions.ParametrosInsuficientesException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,6 +19,11 @@ public class WebCrawlerImplTest {
     @Test(expected = ParametrosInsuficientesException.class)
     public void deveCriticarArgumentoVazio() {
         crawler.start("");
+    }
+
+    @Test
+    public void testa() {
+        crawler.start("http://portalpetrobras.petrobras.com.br", "1");
     }
 
 }

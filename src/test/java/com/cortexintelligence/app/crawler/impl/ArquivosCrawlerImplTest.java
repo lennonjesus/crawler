@@ -27,4 +27,9 @@ public class ArquivosCrawlerImplTest {
          crawler.start("DIRETORIO INEXISTENTE");
     }
 
+    @Test
+    public void deveTestar() {
+        crawler.start("C:\\Users\\x4o7\\Documents");
+    }
+
 }
