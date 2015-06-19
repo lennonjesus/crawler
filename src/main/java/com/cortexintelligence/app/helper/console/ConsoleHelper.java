@@ -1,8 +1,8 @@
 package com.cortexintelligence.app.helper.console;
 
+import com.cortexintelligence.app.crawler.TipoCrawler;
 import com.cortexintelligence.app.exceptions.ParametrosInsuficientesException;
 import com.cortexintelligence.app.exceptions.TipoInvalidoException;
-import com.cortexintelligence.app.crawler.TipoCrawler;
 import org.apache.commons.lang.ArrayUtils;
 
 /**
@@ -22,9 +22,7 @@ public class ConsoleHelper {
             throw new TipoInvalidoException();
         }
 
-        ArrayUtils.removeElement(args, args[0]);
-
-        tipoCrawler.execute(args);
+        tipoCrawler.execute((String[]) ArrayUtils.remove(args, 0));
 
     }
 

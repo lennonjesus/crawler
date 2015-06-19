@@ -7,9 +7,6 @@ import com.cortexintelligence.app.helper.extractor.impl.WordDocumentExtractor;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import org.mockito.Mock;
-
-import java.io.File;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;

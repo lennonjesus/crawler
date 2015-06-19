@@ -34,7 +34,8 @@ public class GmailInbox {
             Message[] messages = inbox.getMessages();
             System.out.println("------------------------------");
             for (int i = 0; i < 10; i++) {
-                System.out.println("Mail Subject:- " + messages[i].getSubject());
+                System.out.println("Tutulo: " + messages[i].getSubject());
+                System.out.println("Conteudo: " + messages[i].getContent());
             }
             inbox.close(true);
             store.close();

@@ -14,6 +14,8 @@ import edu.uci.ics.crawler4j.url.WebURL;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 /**
@@ -23,6 +25,8 @@ public class WebCrawlerImpl extends WebCrawler implements ICrawler {
 
     private static final Pattern IGNORED_EXTENSIONS = Pattern.compile(".*\\.(bmp|gif|jpg|png|mp3|exe|apk|asx|css|doc" +
             "|docx|flv|gif|jpeg|mid|mov|ogg|pdf|png|ppt|ra|ram|rm|swf|wav|wma|wmv|zip|m4a|m4v|mov|mp4|m4b)$");
+
+    private Set<String> visitedLinks = new HashSet<String>();
 
     @Override
     public void start(String... args) {
@@ -69,6 +73,10 @@ public class WebCrawlerImpl extends WebCrawler implements ICrawler {
     public boolean shouldVisit(Page referringPage, WebURL url) {
         String href = url.getURL().toLowerCase();
 
+        if (visitedLinks.contains(href)) {
+            return false;
+        }
+
         if (IGNORED_EXTENSIONS.matcher(href).matches()) {
             return false;
         }
@@ -87,6 +95,8 @@ public class WebCrawlerImpl extends WebCrawler implements ICrawler {
             String text = htmlParseData.getText();
             System.out.println("Conteudo: " + text);
         }
+
+        visitedLinks.add(url);
 
     }
 }
