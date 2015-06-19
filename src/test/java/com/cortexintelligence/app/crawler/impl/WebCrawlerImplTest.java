@@ -21,9 +21,14 @@ public class WebCrawlerImplTest {
         crawler.start("");
     }
 
+    @Test(expected = ParametrosInsuficientesException.class)
+    public void deveCriticarQuantidadeInuficienteDeParametros() {
+        crawler.start("http://google.com");
+    }
+
     @Test
     public void testa() {
-        crawler.start("http://portalpetrobras.petrobras.com.br", "1");
+        crawler.start("http://google.com", "1");
     }
 
 }

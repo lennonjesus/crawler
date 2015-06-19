@@ -2,6 +2,7 @@ package com.cortexintelligence.app.helper;
 
 import com.cortexintelligence.app.exceptions.ParametrosInsuficientesException;
 import com.cortexintelligence.app.exceptions.TipoInvalidoException;
+import com.cortexintelligence.app.helper.console.ConsoleHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -22,9 +23,7 @@ public class ConsoleHelperUnitTest {
 
     @Test(expected = ParametrosInsuficientesException.class)
     public void deveCriticarFonercimentoDeApenasUmParametro() {
-
         console.init("XXXX");
-
     }
 
     @Test(expected = TipoInvalidoException.class)

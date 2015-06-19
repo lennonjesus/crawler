@@ -29,7 +29,7 @@ public class ArquivosCrawlerImplTest {
 
     @Test
     public void deveTestar() {
-        crawler.start("C:\\Users\\x4o7\\Documents");
+        crawler.start("/Users/lennonjesus/Dev/projetos/crawler/src/test/resources/files/");
     }
 
 }

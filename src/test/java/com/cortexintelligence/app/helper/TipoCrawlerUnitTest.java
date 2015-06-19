@@ -1,5 +1,6 @@
 package com.cortexintelligence.app.helper;
 
+import com.cortexintelligence.app.crawler.TipoCrawler;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;

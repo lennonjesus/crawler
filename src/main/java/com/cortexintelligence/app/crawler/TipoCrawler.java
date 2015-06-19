@@ -1,4 +1,4 @@
-package com.cortexintelligence.app.helper;
+package com.cortexintelligence.app.crawler;
 
 import com.cortexintelligence.app.crawler.impl.ArquivosCrawlerImpl;
 import com.cortexintelligence.app.crawler.impl.GmailCrawlerImpl;
